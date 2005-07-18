@@ -1,0 +1,70 @@
+[% classname=input('Class name: ')
+   doxygen=choice('with Doxygen comments: ', 'no', 'yes')
+-%]
+#ifndef [% uc(classname) %]_HPP
+#define [% uc(classname) %]_HPP
+
+[% IF doxygen=='yes' -%]
+/**
+ * @brief [% classname %] ... short description ...
+ * @author [% user.firstname %] [% user.lastname %] <[% user.mail %]>
+ * @date [% date('%Y-%m-%d') %]
+ * ... description ...
+ */
+
+[% END -%]
+class [% classname %]
+{
+  public:
+[% IF doxygen=='yes' -%]
+
+    /**
+     * Default constructor
+     */
+[% END -%]
+    [% classname %]();
+[% IF doxygen=='yes' -%]
+
+    /**
+     * Copy constructor
+     * @param other reference on object to copy
+     */
+[% END -%]
+    [% classname %](const [% classname %]& other);
+[% IF doxygen=='yes' -%]
+
+    /** 
+     * Assignment operator
+     * @param other reference on object to copy
+     * @return reference on initialisated object
+     */
+[% END -%]
+    [% classname %]& operator=(const [% classname %]& other);
+[% IF doxygen=='yes' -%]
+
+    /**
+     * Destructor
+     */
+[% END -%]
+    virtual ~[% classname %]();
+
+  private:
+[% IF doxygen=='yes' -%]
+
+    /**
+     * Base initialisation should be called
+     * at beginning of each constructor
+     */
+[% END -%]
+    void init();
+[% IF doxygen=='yes' -%]
+
+    /**
+     * Method to copy each member (deep copy)
+     * @param other reference on object to copy
+     */
+[% END -%]
+    void init(const [% classname %]& other);
+};
+
+#endif /* #ifndef [% uc(classname) %]_HPP */

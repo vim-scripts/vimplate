@@ -1,0 +1,38 @@
+[% classname=input("Class name: ") -%]
+#include "[% classname %].hpp"
+
+// [% date('%Y-%m-%d') %] [% user.firstname %] [% user.lastname %] <[% user.mail %]>
+
+[% classname %]::[% classname %]()
+{
+  init();
+}
+
+[% classname %]::[% classname %](const [% classname %]& other)
+{
+  init();
+  *this=other;
+}
+
+[% classname %]& [% classname %]::operator=(const [% classname %]& other)
+{
+  if (this != &other){  // no self-assignmet
+    init(other);
+  }
+  return *this;
+}
+
+[% classname %]::~[% classname %]()
+{
+  // cleanup
+}
+
+void [% classname %]::init(void)
+{
+  // base initialisation off members.
+}
+
+void [% classname %]::init(const [% classname %]& other)
+{
+  // "deep copy" member to member.
+}
