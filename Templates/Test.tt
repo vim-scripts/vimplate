@@ -2,7 +2,7 @@
 [% eyescolor=choice('her eyes: ', 'blue', 'green', 'gray', 'black') -%]
 [% weekday=choice('which weekday: ', 'Sonnday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday') -%]
 [% location=input('your own location: ') -%]
-                                      [% ucfirst(location) %], [% date('%b %e, %Y') %] 
+                                      [% ucfirst(location) %], [% date('%b %d, %Y') %] 
 My Dear [% ucfirst(name) %],
 
 Do you know that I love the color of your [% eyescolor %] eyes?

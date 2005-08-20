@@ -26,8 +26,15 @@ class [% classname %]
 [% IF doxygen=='yes' -%]
 
     /**
+     * Destructor
+     */
+[% END -%]
+    virtual ~[% classname %]();
+[% IF doxygen=='yes' -%]
+
+    /**
      * Copy constructor
-     * @param other reference on object to copy
+     * @param other Reference on object to copy.
      */
 [% END -%]
     [% classname %](const [% classname %]& other);
@@ -35,36 +42,14 @@ class [% classname %]
 
     /** 
      * Assignment operator
-     * @param other reference on object to copy
-     * @return reference on initialisated object
+     * @param other Reference on object to copy.
+     * @return Reference on initialisated object.
      */
 [% END -%]
     [% classname %]& operator=(const [% classname %]& other);
-[% IF doxygen=='yes' -%]
-
-    /**
-     * Destructor
-     */
-[% END -%]
-    virtual ~[% classname %]();
 
   private:
-[% IF doxygen=='yes' -%]
 
-    /**
-     * Base initialisation should be called
-     * at beginning of each constructor
-     */
-[% END -%]
-    void init();
-[% IF doxygen=='yes' -%]
-
-    /**
-     * Method to copy each member (deep copy)
-     * @param other reference on object to copy
-     */
-[% END -%]
-    void init(const [% classname %]& other);
 };
 
 #endif /* #ifndef [% uc(classname) %]_HPP */

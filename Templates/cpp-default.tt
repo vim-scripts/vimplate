@@ -5,21 +5,6 @@
 
 [% classname %]::[% classname %]()
 {
-  init();
-}
-
-[% classname %]::[% classname %](const [% classname %]& other)
-{
-  init();
-  *this=other;
-}
-
-[% classname %]& [% classname %]::operator=(const [% classname %]& other)
-{
-  if (this != &other){  // no self-assignmet
-    init(other);
-  }
-  return *this;
 }
 
 [% classname %]::~[% classname %]()
@@ -27,12 +12,15 @@
   // cleanup
 }
 
-void [% classname %]::init(void)
+[% classname %]::[% classname %](const [% classname %]& other)
 {
-  // base initialisation off members.
+  *this=other;
 }
 
-void [% classname %]::init(const [% classname %]& other)
+[% classname %]& [% classname %]::operator=(const [% classname %]& other)
 {
-  // "deep copy" member to member.
+  if (this != &other){  // no self-assignmet
+    // deep copy
+  }
+  return *this;
 }

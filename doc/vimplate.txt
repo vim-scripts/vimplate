@@ -1,14 +1,27 @@
-#################################################
-## vimplate - Template-Toolkit support for Vim ##
-#################################################
+*vimplate*   vimplate - vim template   (example for C++, Perl, LaTeX and make)
 
-###############
-# DESCRIPTION #
-###############
+Author:      Urs Stotz <stotz@gmx.ch>
+Last change: 2005 August 20
 
+==============================================================================
+1. Contents                                              *vimplate-contents*
+===========
+ 1. Contents.................: |vimplate-contents|
+ 2. Description..............: |vimplate-description|
+ 3. Usage....................: |vimplate-usage|
+ 4. Subroutines..............: |vimplate-subroutines|
+ 5. Example..................: |vimplate-example|
+ 6. Requirements.............: |vimplate-requirements|
+ 7. Documentation............: |vimplate-documentation|
+
+==============================================================================
+2. Description                                        *vimplate-description*
+==============
 Vimplate provides an extensible and powerful template processing system.
 It is based on Perl and Template-Toolkit.
-You can create templates for program code, makefiles, letters, html pages, latex etc.
+You can create templates for program code, makefiles, letters, html pages,
+latex etc. As example vimplate contains templates for C++, LaTeX, Perl
+and Makefile.
 With vimplate you can write templates which interact with the user.
 For themes are the functions choice() and input().
 You can choose different locale for the function date() and locale().
@@ -17,13 +30,48 @@ You can write your own perl code directly in the templates.
 In case you find my template useful,
 or have suggestions for improvements, please let me know.
 
-If you write a new template, and  would like me to add it to the vimplate package
+If you write a new template,
+and  would like me to add it to the vimplate package
 please send it to: stotz@gmx.ch
 
+==============================================================================
+3. Usage                                                    *vimplate-usage*
+========
 Usage:
-  :Vimplate <template>
-      choice <template> whit <TAB> (command line completion is supported).
-      With <TAB> all templates are listed.
+  :Vimplate <template> [options]
+    choice <template> whit <TAB> (command line completion is supported).
+    With <TAB> all templates are listed.
+    [options]
+      -user|u=<username>
+        Use the information form user <username> while parsing templates.
+      -dir|d=<templatedir>
+        Search templatefiles in <templatedir>.
+
+==============================================================================
+4. Subroutines                                         *vimplate-subroutines*
+==============
+  locale()                  for locale please see: man locale
+  [% loc=locale() %]        get the current locale
+                              and write it to the variable loc
+  [% locale('C') %]         set global the current locale to C
+  [% locale('de_DE') %]     set global the current locale to de_DE
+  date()                    for date please see: man date
+  [% date('%c') %]          print the current date
+                              with the current locale setting
+  [% date('de_DE', '%c') %] print the current date with the locale de_DE
+  input()
+  [% var=input() %]         read input from user
+                              and write it to the variable var
+  choice()
+  [% day=choice('day:', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa') %]
+                            let the user choice between different values
+                            and write it to the variable day
+
+  please try :Vimplate Test
+
+==============================================================================
+5. Example                                                *vimplate-example*
+==========
 
 Example:
   the template letter.tt:
@@ -33,7 +81,7 @@ Example:
        name=input('name: ')
        location=input('your location: ')
     -%]
-                                      [% ucfirst(location) %], [% date('C', '%b %e, %Y') %] 
+                       [% ucfirst(location) %], [% date('C', '%b %d, %Y') %]
 
     Dear [% IF sex=='female'; 'Ms'; ELSE; 'Mr'; END %] [% ucfirst(name) %]
 
@@ -212,40 +260,32 @@ Example:
     #endif /* #ifndef PARENT_HPP */
     ________________________________________________________
 
-Subroutines:
-  locale()                  for locale please: man locale
-  [% loc=locale() %]        get the current locale and write it to the variable loc
-  [% locale('C') %]         set global the current locale to C
-  [% locale('de_DE') %]     set global the current locale to de_DE
-  date()                    for date please see: man date
-  [% date('%c') %]          print the current date with the current locale setting
-  [% date('de_DE', '%c') %] print the current date with the locale de_DE
-  input()
-  [% var=input() %]         reade input from user and write it to the variable var
-  choice()
-  [% day=choice('day:', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa') %]
-                            let the user choice between different values
-                            and write it to the variable day
-
-  please try :Vimplate Test
-  and read the documentation to Template-Toolkit.
-
-Requirements:
+==============================================================================
+6. Requirements                                      *vimplate-requirements*
+===============
   Perl
     http://www.perl.org
+    Windows users:
+      http://www.activestate.com/Products/ActivePerl
   Template-Toolkit
     http://search.cpan.org/~abw/Template-Toolkit-2.14
     or apt-get install libtemplate-perl
     or perl -MCPAN -e"install Template"
+    Windows users:
+      ppm install
+        http://openinteract.sourceforge.net/ppmpackages/AppConfig.ppd
+      ppm install
+        http://openinteract.sourceforge.net/ppmpackages/Template-Toolkit.ppd
 
+==============================================================================
+7. Documentation                                    *vimplate-documentation*
+================
 Documentation:
   - http://www.template-toolkit.org/docs.html
   - http://perldoc.perl.org/perl.html
 
 Todo:
   - better exception handling
-  - write a vim documentation
-  - write a bether documentation
   - write more templates
 
 License:
@@ -268,12 +308,11 @@ Copyright:
   Copyright (c) 2005, Urs Stotz <stotz@gmx.ch>
 
 Version:
-  vimplate 0.2.2
+  vimplate 0.2.3
 
-################
-# INSTALLATION #
-################
-
+==============================================================================
+8. Installation                                      *vimplate-installation*
+===============
 Depends:
   Perl:
     http://www.perl.org
@@ -286,6 +325,8 @@ Suggests:
 
 Installation steps:
   1. change to your $HOME/.vim directory
+       (on windows: set the variable HOME 
+         set HOME=c:\vim)
   2. untar vimplate.tar.gz: gzip -dc vimplate.tar.gz |tar xpvf -
   3. move the vimplate into your preferred directory
       for example in $HOME/bin or /usr/local/bin
@@ -294,7 +335,16 @@ Installation steps:
   5. edit your $HOME/.vimrc and set the variable Vimplate to
       to the place where vimplate is located
       for example let Vimplate = "$HOME/bin/vimplate"
+        (on windows: let Vimplate = "$HOME/bin/vimplate.cmd" )
   6. run vimplate to create your configuration file $HOME/.vimplaterc
       for example $HOME/bin/vimplate -createconfig
+        (on windows: $HOME/bin/vimplate.cmd -createconfig" )
   7. edit your $HOME/.vimplaterc
-  8. happy vimplating
+       (on windows: $HOME/_vimplaterc)
+  8. change to the $HOME/.vim/doc directory,
+      start Vim and run the ":helptags ." command to process the
+      taglist help file. (see: |helptags| )
+  9. happy vimplating
+==============================================================================
+
+vim:tw=78:ts=2:ft=help
